@@ -115,7 +115,7 @@ namespace MarsRover.Common.Models
         {
             if (CommonHelper.ValidateCoordinates(combinedCoordinates))
             {
-                var coordinates = combinedCoordinates.Split(' ');
+                var coordinates = combinedCoordinates.Split();
                 return (X: coordinates[0].ToIntOrDefault(), Y: coordinates[1].ToIntOrDefault(), Direction: coordinates[2].GetDirection());
             }
 

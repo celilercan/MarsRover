@@ -13,12 +13,13 @@ namespace MarsRover.Common.Models
             this.Direction = Direction.North;
         }
 
-        public Rover(string combinedCoordinates)
+        public Rover(string combinedCoordinates, Plato plato)
         {
             var coordinates = this.CoordinateResolver(combinedCoordinates);
             this.X = coordinates.X;
             this.Y = coordinates.Y;
             this.Direction = coordinates.Direction;
+            this.Plato = plato;
         }
 
         public int X { get; set; }
@@ -26,6 +27,8 @@ namespace MarsRover.Common.Models
         public int Y { get; set; }
 
         public Direction Direction { get; set; }
+
+        private Plato Plato { get; set; }
 
         public void Run(string commands)
         {
@@ -95,15 +98,35 @@ namespace MarsRover.Common.Models
             switch (this.Direction)
             {
                 case Direction.North:
+                    if (this.Y == this.Plato.YMax)
+                    {
+                        this.Y = this.Plato.YMin;
+                        break;
+                    }
                     this.Y++;
                     break;
                 case Direction.South:
+                    if (this.Y == this.Plato.YMin)
+                    {
+                        this.Y = this.Plato.YMax;
+                        break;
+                    }
                     this.Y--;
                     break;
                 case Direction.East:
+                    if (this.X == this.Plato.XMax)
+                    {
+                        this.X = this.Plato.XMin;
+                        break;
+                    }
                     this.X++;
                     break;
                 case Direction.West:
+                    if (this.X == this.Plato.XMin)
+                    {
+                        this.X = this.Plato.XMax;
+                        break;
+                    }
                     this.X--;
                     break;
                 default:

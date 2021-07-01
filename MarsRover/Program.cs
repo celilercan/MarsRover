@@ -11,7 +11,8 @@ namespace MarsRover
             do
             {
                 var combinedCoordinates = GetEnteredCoordinates();
-                var rover = new Rover(combinedCoordinates);
+                var plato = new Plato();
+                var rover = new Rover(combinedCoordinates, plato);
                 var commands = GetEnteredCommands();
                 rover.Run(commands);
 
